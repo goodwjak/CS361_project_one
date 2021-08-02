@@ -1,0 +1,10 @@
+/home/ghost/Documents/classes/2021/summer/cs361/CS361_project_one/rocket_server/target/debug/deps/futures_channel-a3d512e14518dc30.rmeta: /home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/lib.rs /home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/lock.rs /home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/mpsc/mod.rs /home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/mpsc/queue.rs /home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/mpsc/sink_impl.rs /home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/oneshot.rs
+
+/home/ghost/Documents/classes/2021/summer/cs361/CS361_project_one/rocket_server/target/debug/deps/futures_channel-a3d512e14518dc30.d: /home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/lib.rs /home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/lock.rs /home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/mpsc/mod.rs /home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/mpsc/queue.rs /home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/mpsc/sink_impl.rs /home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/oneshot.rs
+
+/home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/lib.rs:
+/home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/lock.rs:
+/home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/mpsc/mod.rs:
+/home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/mpsc/queue.rs:
+/home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/mpsc/sink_impl.rs:
+/home/ghost/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-channel-0.3.16/src/oneshot.rs:

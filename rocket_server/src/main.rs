@@ -67,6 +67,7 @@ fn heatmap(pagename: &str) -> String {
 #[post("/heatmap/<pagename>",format="application/json", data="<input>")]
 fn get_heatmap_data(pagename: &str) -> String {
     let xy_vals = parse_mouse_clicks(input);
+    let heatmap_visual = make_heatmap(xy_vals);
     format!("{}, heatmap is being generated...", pagename)
     println!("Heatmap input: {}", input);
 }
@@ -85,7 +86,34 @@ fn get_heatmap_data(pagename: &str) -> String {
  * Description: converts the post data into usable data structs.
  */
 fn parse_mouse_clicks(json_data: str) {
-    
+    //create vector of coordinates.
+    let v Vec::<coordinate> = Vec::new();
+
+    //TODO: add parsing to this function.
+
+    //A struct we will reuse in a loop to "map" the data.
+    let mut click_point;
+
+    //TODO: Add loop to this.
+    click_point.x = 0;
+    click_point.y = 0;
+
+    v.push((0, 0)<coordinate>)
+
+    //return the vector and give ownership to the calling scope.
+    v
+}
+
+
+/*
+ * Input: A vector of coordinats
+ * Output: a visual of those coordinates.
+ * Description: Makes a visual heatmap of the coodinates.
+ */
+fn make_heatmap(click_points: Vec::<coordinate>) {
+    //TODO: Find a crate for making visual data.
+
+    let heatmap = 1
 }
 
 

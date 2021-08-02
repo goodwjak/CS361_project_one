@@ -24,11 +24,13 @@ heatmap of usage.<br>
 
 <b>TODO:</b>
 
--Get the rust server to work, AKA a page to pop up. DONE!
--Figure out format for x,y data for mouse events that I will accept.
--Write code to accept that data into a local variable for processing
--Write stuff to use the click events to draw up a page or image.
--Have the server send that image or page back(Whatever takes less bandwidth)
+-Get the rust server to work, AKA a page to pop up. DONE!<br>
+-Figure out format for x,y data for mouse events that I will accept.<br>
+-Write code to accept that data into a local variable for processing<br>
+-Write stuff to use the click events to draw up a page or image.<br>
+-Have the server send that image or page back(Whatever takes less bandwidth)<br>
+
+
 
 
 

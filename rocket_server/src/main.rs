@@ -19,6 +19,25 @@
 //URL:  https://rocket.rs/v0.5-rc/guide/overview/
 use rocket::*;
 
+
+//#######################################
+//GLOBAL
+//#######################################
+
+//A xy coordinate struct just to package them together.
+struct coordinate {
+    x: u64,
+    y: u64
+}
+
+
+
+//#######################################
+//Request Handlers
+//#######################################
+
+
+
 /*
  * Input: a get request handler
  * Ouput: a static string.
@@ -47,9 +66,33 @@ fn heatmap(pagename: &str) -> String {
  */
 #[post("/heatmap/<pagename>",format="application/json", data="<input>")]
 fn get_heatmap_data(pagename: &str) -> String {
+    let xy_vals = parse_mouse_clicks(input);
     format!("{}, heatmap is being generated...", pagename)
     println!("Heatmap input: {}", input);
 }
+
+
+
+
+//#######################################
+//Functions
+//#######################################
+
+
+/*
+ * Input: json of mouse xy values when clicked.
+ * Output: those xy values in a array or list.
+ * Description: converts the post data into usable data structs.
+ */
+fn parse_mouse_clicks(json_data: str) {
+    
+}
+
+
+//#######################################
+//MAIN CODE
+//#######################################
+
 
 
 //You have to launch the rocket to get anything done.

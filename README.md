@@ -1,7 +1,7 @@
 # CS361_project_one
 
 
-USAGE:
+<b>USAGE:</b>
 
 To use the Microservice for heatmaps:<br>
 1.) start the micro service in the dir with "cargo run"<br>

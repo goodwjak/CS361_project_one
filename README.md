@@ -1,5 +1,18 @@
 # CS361_project_one
 
+
+USAGE:
+
+To use the Microservice for heatmaps:
+1.) start the micro service in the dir with "cargo run"
+2.) use JS to record mouse x,y data on clicks into a array.
+3.) POST the data to the microservice using the format below:
+
+4.)Get a heatmap back for your use.
+
+
+
+
 Going to add the code I made in my gitlab repo to this one.
 I kinda wish I would have remembered I had this one a gitlab I was supposed to
 use.

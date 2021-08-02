@@ -45,9 +45,10 @@ fn heatmap(pagename: &str) -> String {
  * Output: a heatmap file.
  * Description: handles heatmap requests.
  */
-#[post("/heatmap/<pagename>")]
+#[post("/heatmap/<pagename>", data="<input>")]
 fn get_heatmap_data(pagename: &str) -> String {
     format!("{}, heatmap is being generated...", pagename)
+    println!("Heatmap input: {}", input);
 }
 
 

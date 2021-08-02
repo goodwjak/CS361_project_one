@@ -18,6 +18,11 @@ fn hello(name: &str, age: u8) -> String {
 }
 
 
+#[get("/")]
+fn index() -> &'static str {
+    "Hello world"
+}
+
 /*
  * Input: a get request with a pagename.
  * Output: a string response.
@@ -32,7 +37,7 @@ fn heatmap(pagename: &str) -> String {
 //You have to launch the rocket to get anything done.
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![heatmap])
+    rocket::build().mount("/", routes![index])
 }
 
 

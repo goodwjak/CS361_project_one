@@ -4,6 +4,12 @@
  * Description: My microservice to get click data and provide a heatmap.
  */
 
+//So what does lifecycle with rocket look like?
+//1: Routing -> parse and operate.
+//2: Validation -> Try is and if it fails then off to next branch
+//3: Processing -> request handler invoked returns response.
+//4: Response -> rocket sends out the response.
+
 
 //This is a old way of using the crate.
 //#[macro_use] extern crate rocket;
@@ -11,13 +17,11 @@
 //new way, use all the stuff from rocket crate.
 use rocket::*;
 
-//This is just the sample one.
-#[get("/hello/<name>/<age>")]
-fn hello(name: &str, age: u8) -> String {
-    format!("Hello, {} year old named {}!", age, name)
-}
-
-
+/*
+ * Input: a get request handler
+ * Ouput: a static string.
+ * Description: Basic does nothing cool.
+ */
 #[get("/")]
 fn index() -> &'static str {
     "Hello world"
@@ -32,6 +36,9 @@ fn index() -> &'static str {
 fn heatmap(pagename: &str) -> String {
     format!("{}, heatmap is being generated...", pagename)
 }
+
+
+
 
 
 //You have to launch the rocket to get anything done.

@@ -3,7 +3,7 @@
 
 USAGE:
 
-To use the Microservice for heatmaps:
+To use the Microservice for heatmaps:<br>
 1.) start the micro service in the dir with "cargo run"
 2.) use JS to record mouse x,y data on clicks into a array.
 3.) POST the data to the microservice using the format below:

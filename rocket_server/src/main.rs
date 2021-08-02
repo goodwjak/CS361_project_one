@@ -18,14 +18,14 @@
 //Actually they explain why they used the other way on the page.
 //URL:  https://rocket.rs/v0.5-rc/guide/overview/
 use rocket::*;
-
+use std::io;
 
 //#######################################
 //GLOBAL
 //#######################################
 
 //A xy coordinate struct just to package them together.
-struct coordinate {
+struct Coordinate {
     x: u64,
     y: u64
 }
@@ -48,16 +48,6 @@ fn index() -> &'static str {    // <- request handler
     "Hello world"
 }
 
-/*
- * Input: a get request with a pagename.
- * Output: a string response.
- * Description: A placeholder function that does a little.
- */
-#[get("/heatmap/<pagename>")]
-fn heatmap(pagename: &str) -> String {
-    format!("{}, heatmap is being generated...", pagename)
-}
-
 
 /*
  * Input: a bunch of mouse data.
@@ -68,7 +58,7 @@ fn heatmap(pagename: &str) -> String {
 fn get_heatmap_data(pagename: &str) -> String {
     let xy_vals = parse_mouse_clicks(input);
     let heatmap_visual = make_heatmap(xy_vals);
-    format!("{}, heatmap is being generated...", pagename)
+    format!("{}, heatmap is being generated...", pagename);
     println!("Heatmap input: {}", input);
 }
 
@@ -87,7 +77,7 @@ fn get_heatmap_data(pagename: &str) -> String {
  */
 fn parse_mouse_clicks(json_data: str) {
     //create vector of coordinates.
-    let v Vec::<coordinate> = Vec::new();
+    let v Vec::<Coordinate> = Vec::new();
 
     //TODO: add parsing to this function.
 
@@ -113,7 +103,8 @@ fn parse_mouse_clicks(json_data: str) {
 fn make_heatmap(click_points: Vec::<coordinate>) {
     //TODO: Find a crate for making visual data.
 
-    let heatmap = 1
+    let heatmap = 1;
+    heatmap
 }
 
 

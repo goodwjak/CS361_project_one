@@ -10,7 +10,9 @@ To use the Microservice for heatmaps:<br>
 
 4.)Get a heatmap back for your use.<br>
 
-
+The needed JS is in the script file, Once you add this to the head of your
+html document you can use it to post the mouse event data to the heatmap
+microservice.<br>
 
 
 Going to add the code I made in my gitlab repo to this one.

@@ -3,22 +3,30 @@
 <head>
     <!--This is for tracking mouse events on the page-->
 <script>
-  
+    //Make two global arrays to hold the mouse click vals.
+    let x_arr = new Array();
+    let y_arr = new Array();
+
      // coordinate function that calculate the X
      // coordinate and Y coordinates
      function coordinate(event) {
-  
-     // clientX gives horizontal coordinate
-     var x = event.clientX;
-  
-     // clientY gives vertical coordinates
-     var y = event.clientY;
-     document.getElementById("X").value = x;
-     document.getElementById("Y").value = y;
-  }
+        // clientX gives horizontal coordinate
+        var x = event.clientX;
+        // clientY gives vertical coordinates
+        var y = event.clientY;
+        document.getElementById("X").value = x;
+        document.getElementById("Y").value = y;
+        x_arr.push(x);
+        y_arr.push(y);
+    }
 
     function post_heatmap(event) {
         console.log("NOTHING YET");
+        //Convert the arr into json stuff.
+        const x_json = JSON.stringify(x_arr);
+        const y_json = JSON.stringify(y_arr);
+        const coordinates_json = x_json + y_json;
+        console.log(coordinates_json);
     }
 </script>
 

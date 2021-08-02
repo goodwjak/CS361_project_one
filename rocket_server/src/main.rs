@@ -57,7 +57,7 @@ fn get_heatmap_data(pagename: &str) -> String {
 fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![index])
-        .mount("/heatmap", routes![heatmap])
+        .mount("/heatmap", routes![get_heatmap_data])
 }
 
 

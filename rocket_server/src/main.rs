@@ -15,6 +15,8 @@
 //#[macro_use] extern crate rocket;
 
 //new way, use all the stuff from rocket crate.
+//Actually they explain why they used the other way on the page.
+//URL:  https://rocket.rs/v0.5-rc/guide/overview/
 use rocket::*;
 
 /*
@@ -22,8 +24,8 @@ use rocket::*;
  * Ouput: a static string.
  * Description: Basic does nothing cool.
  */
-#[get("/")]
-fn index() -> &'static str {
+#[get("/")] // <- Route attribute
+fn index() -> &'static str {    // <- request handler
     "Hello world"
 }
 
@@ -38,13 +40,23 @@ fn heatmap(pagename: &str) -> String {
 }
 
 
-
+/*
+ * Input: a bunch of mouse data.
+ * Output: a heatmap file.
+ * Description: handles heatmap requests.
+ */
+#[post("/heatmap/<pagename>")]
+fn get_heatmap_data(pagename: &str) -> String {
+    format!("{}, heatmap is being generated...", pagename)
+}
 
 
 //You have to launch the rocket to get anything done.
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![index])
+    rocket::build()
+        .mount("/", routes![index])
+        .mount("/heatmap", routes![heatmap])
 }
 
 

@@ -4,11 +4,11 @@
 USAGE:
 
 To use the Microservice for heatmaps:<br>
-1.) start the micro service in the dir with "cargo run"
-2.) use JS to record mouse x,y data on clicks into a array.
-3.) POST the data to the microservice using the format below:
+1.) start the micro service in the dir with "cargo run"<br>
+2.) use JS to record mouse x,y data on clicks into a array.<br>
+3.) POST the data to the microservice using the format below:<br>
 
-4.)Get a heatmap back for your use.
+4.)Get a heatmap back for your use.<br>
 
 
 
@@ -17,12 +17,12 @@ Going to add the code I made in my gitlab repo to this one.
 I kinda wish I would have remembered I had this one a gitlab I was supposed to
 use.
 
-Q:Anyway What is this?
+Q:Anyway What is this?<br>
 A: A rust based microservice that will take mouse events and give back a 
-heatmap of usage.
+heatmap of usage.<br>
 
 
-TODO:
+<b>TODO:</b>
 
 -Get the rust server to work, AKA a page to pop up. DONE!
 -Figure out format for x,y data for mouse events that I will accept.

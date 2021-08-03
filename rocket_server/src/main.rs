@@ -55,11 +55,12 @@ fn index() -> &'static str {    // <- request handler
  * Description: handles heatmap requests.
  */
 #[post("/heatmap/<pagename>",format="application/json", data="<input>")]
-fn get_heatmap_data(pagename: &str) -> String {
+fn get_heatmap_data(pagename: &str, input: &str) -> &'static str {
     let xy_vals = parse_mouse_clicks(input);
     let heatmap_visual = make_heatmap(xy_vals);
     format!("{}, heatmap is being generated...", pagename);
     println!("Heatmap input: {}", input);
+    "TEST"
 }
 
 
@@ -75,14 +76,14 @@ fn get_heatmap_data(pagename: &str) -> String {
  * Output: those xy values in a array or list.
  * Description: converts the post data into usable data structs.
  */
-fn parse_mouse_clicks(json_data: str) {
+fn parse_mouse_clicks(json_data: &str) -> Vec::<Coordinate> {
     //create vector of coordinates.
-    let v Vec::<Coordinate> = Vec::new();
+    let v: Vec::<Coordinate> = Vec::new();
 
     //TODO: add parsing to this function.
 
     //A struct we will reuse in a loop to "map" the data.
-    let mut click_point;
+    let mut click_point: Coordinate;
 
     //TODO: Add loop to this.
     for click_point in json_data.iter() {
@@ -91,7 +92,7 @@ fn parse_mouse_clicks(json_data: str) {
     click_point.x = 0;
     click_point.y = 0;
 
-    v.push((0, 0)<coordinate>)
+    v.push(click_point);
 
     //return the vector and give ownership to the calling scope.
     v
@@ -104,7 +105,7 @@ fn parse_mouse_clicks(json_data: str) {
  * Description: Makes a visual heatmap of the coodinates.
  */
 //TODO: change return type to a file or something.
-fn make_heatmap(click_points: Vec::<coordinate>) ->u64 {
+fn make_heatmap(click_points: Vec::<Coordinate>) ->u64 {
     //TODO: Find a crate for making visual data.
 
     let heatmap = 1;

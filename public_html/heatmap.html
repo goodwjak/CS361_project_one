@@ -33,7 +33,7 @@
         
         //Create a xhr object.
         let xhr = new XMLHttpRequest();
-        let url = "localhost:8080/heatmap";
+        let url = "127.0.0.1:8000/heatmap/goal_tracker";
 
         //open a connection
         xhr.open("POST", url, true);
@@ -84,6 +84,18 @@
             Goal Data
         </h3>
       </span>
+
+    <span>
+        <form action="/action_page.php">
+        <label for="GoalSearch:<">GoalSearch:</label>
+        <input type="text" id="goalSearch" name="GoalSearch:<" value="Empty"><br>
+        <label for="description">Description</label>
+        <textarea type="text" id="description" name="description"></textarea><br>
+
+
+        </form>       
+    </span>
+
       <br>
       <span onclick="post_heatmap(event)">
         <a href="#" class="myButton">Get HeatMap</a>
@@ -147,7 +159,9 @@
     <h3>
         COMMENTS MICROSERVICE GOES HERE!
     </h3>
+    <textarea class="chatBox" rows=10 cols=80></textarea>
 </span>
+
 </body>
 </html>
  

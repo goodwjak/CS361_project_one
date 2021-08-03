@@ -118,4 +118,11 @@ input:checked + .slider:before {
     rows: 80;
     cols: 10;
 }   
+
+.comments{
+    text-align: center;
+}
+
+.chatBox{
+    margin-left: 35vw;
 }

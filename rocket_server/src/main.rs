@@ -19,6 +19,12 @@
 //URL:  https://rocket.rs/v0.5-rc/guide/overview/
 use rocket::*;
 use std::io;
+//use serde::{Serialize, Deserialize};
+//use serde::de::{self, Deserialize, Deserializer, Visitor, SeqAccess, MapAccess};
+#[macro_use] extern crate serde;
+use plotters::prelude::*;
+
+
 
 //#######################################
 //GLOBAL
@@ -78,17 +84,22 @@ fn get_heatmap_data(pagename: &str, input: &str) -> &'static str {
  */
 fn parse_mouse_clicks(json_data: &str) -> Vec::<Coordinate> {
     //create vector of coordinates.
-    let v: Vec::<Coordinate> = Vec::new();
+    let mut v: Vec::<Coordinate> = Vec::new();
 
     //TODO: add parsing to this function.
 
     //A struct we will reuse in a loop to "map" the data.
-    let mut click_point: Coordinate;
+    let mut click_point = Coordinate {
+        x: 0,
+        y: 0,
+    };
 
     //TODO: Add loop to this.
-    for click_point in json_data.iter() {
+    //for click_point in json_data.iter() {
         //TODO: Add a body to this.
-    }
+    //}
+
+    //set to zero.
     click_point.x = 0;
     click_point.y = 0;
 

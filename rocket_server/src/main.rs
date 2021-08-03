@@ -21,10 +21,9 @@ use rocket::*;
 use std::io;
 //use serde::{Serialize, Deserialize};
 //use serde::de::{self, Deserialize, Deserializer, Visitor, SeqAccess, MapAccess};
-#[macro_use] extern crate serde;
+//#[macro_use] extern crate serde;
+use serde_json::{Result, Value};
 use plotters::prelude::*;
-
-
 
 //#######################################
 //GLOBAL
@@ -62,10 +61,14 @@ fn index() -> &'static str {    // <- request handler
  */
 #[post("/heatmap/<pagename>",format="application/json", data="<input>")]
 fn get_heatmap_data(pagename: &str, input: &str) -> &'static str {
-    let xy_vals = parse_mouse_clicks(input);
-    let heatmap_visual = make_heatmap(xy_vals);
+    //let xy_vals = parse_mouse_clicks(input);
+    let mut v: Vec::<Coordinate> = Vec::new();
+
+    let xy_parsed = parse_json_post(input, &v);
+    //let heatmap_visual = make_heatmap(xy_vals);
     format!("{}, heatmap is being generated...", pagename);
     println!("Heatmap input: {}", input);
+    println!("xy_parsed: {}", xy_parsed["x_vals"]);
     "TEST"
 }
 
@@ -77,6 +80,19 @@ fn get_heatmap_data(pagename: &str, input: &str) -> &'static str {
 //#######################################
 
 
+fn parse_json_post(json_data: &str, v: &Vec::<Coordinate>) -> Result<()> {
+     //make sede from json string.
+    let val: Value = serde_json::from_str(json_data)?;
+    println!("val: {}", val);
+
+    println!("x0: {}", val[0]);
+
+
+
+    Ok(())
+}
+
+
 /*
  * Input: json of mouse xy values when clicked.
  * Output: those xy values in a array or list.
@@ -86,7 +102,9 @@ fn parse_mouse_clicks(json_data: &str) -> Vec::<Coordinate> {
     //create vector of coordinates.
     let mut v: Vec::<Coordinate> = Vec::new();
 
-    //TODO: add parsing to this function.
+    //let example_json: &str = "[776,776,788,788,812,812,798,798],[236,236,267,267,267,267,235,235]";
+    
+    let data = parse_json_post(json_data, &v);
 
     //A struct we will reuse in a loop to "map" the data.
     let mut click_point = Coordinate {
@@ -94,10 +112,7 @@ fn parse_mouse_clicks(json_data: &str) -> Vec::<Coordinate> {
         y: 0,
     };
 
-    //TODO: Add loop to this.
-    //for click_point in json_data.iter() {
-        //TODO: Add a body to this.
-    //}
+    //
 
     //set to zero.
     click_point.x = 0;
@@ -134,8 +149,8 @@ fn make_heatmap(click_points: Vec::<Coordinate>) ->u64 {
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", routes![index])
-        .mount("/heatmap", routes![get_heatmap_data])
+        //.mount("/", routes![index])
+        .mount("/", routes![get_heatmap_data])
 }
 
 

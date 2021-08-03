@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
+    <meta charset="utf8">
 <head>
+
+<link rel="stylesheet" type="text/css" href="style.css">
     <!--This is for tracking mouse events on the page-->
 <script>
     //Make two global arrays to hold the mouse click vals.
@@ -25,25 +28,40 @@
         //Convert the arr into json stuff.
         const x_json = JSON.stringify(x_arr);
         const y_json = JSON.stringify(y_arr);
-        const coordinates_json = x_json + y_json;
+        const coordinates_json = x_json + ", " +  y_json;
         console.log(coordinates_json);
+        
+        //Create a xhr object.
+        let xhr = new XMLHttpRequest();
+        let url = "localhost:8080/heatmap";
+
+        //open a connection
+        xhr.open("POST", url, true);
+
+        //set the request header
+            xhr.setRequestHeader("Content-Type", "application/json");
+  
+            // Create a state change callback
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+  
+                    // Print received data from server
+                    result.innerHTML = this.responseText;
+  
+                }
+            };
+  
+            // Converting JSON data to string
+            //var data = JSON.stringify({ "name": name.value, "email": email.value });
+  
+            // Sending data with the request
+            xhr.send(coordinates_json);
+        
+        
     }
 </script>
-
-<style>
-.flex-container {
-  display: flex;
-  background-color: DodgerBlue;
-}
-
-.flex-container > div {
-  background-color: #f1f1f1;
-  margin: 10px;
-  padding: 20px;
-  font-size: 30px;
-}
-</style>
 </head>
+
 <body onclick="coordinate(event)">
 
 
@@ -57,27 +75,79 @@
    Y-coordinate
    <input type="text" id="Y">
 
+
+   <!--Main Boxes-->
 <div class="flex-container">
   <div>
-      Goal serch
-      <span onclick="post_heatmap(event)"> Generate heatmap!</span>
+      <span>
+        <h3>
+            Goal Data
+        </h3>
+      </span>
+      <br>
+      <span onclick="post_heatmap(event)">
+        <a href="#" class="myButton">Get HeatMap</a>
+      </span>
   </div>
   
   <div>
+      <span>
+          <h3>
       Settings
+          </h3>
+      </span>
+      
+    <span>
+    <!-- Rounded switch -->
+    <label class="switch">
+    <input type="checkbox">
+    <span class="slider round"></span>
+    </label>
+    Live Preview
+    </span>
+
+    <br>    
+
+    <span>
+    <!-- Rounded switch -->
+    <label class="switch">
+    <input type="checkbox">
+    <span class="slider round"></span>
+    </label>
+    Dark Mode
+    </span>
+
   </div>
   
   <div>
-      Add a goal
+      <span><h3>Add a goal</h3></span>
+
+    <span>
+        <form action="/action_page.php">
+        <label for="goalName">GoalName:</label>
+        <input type="text" id="goalName" name="goalName" value="Empty"><br>
+        <label for="description">Description</label>
+        <textarea type="text" id="description" name="description"></textarea><br>
+        <input class="myButton" type="submit" value="Add Goal">
+        <input class="myButton" type="undo" value="UNDO">
+        </form> 
+    </span>
+
+    <span>
+        <h4>Status Log</h4>
+        <br>
+        <textarea class="statusLog"> </textarea>
+    </span>
+
   </div>  
 
 </div>
 
-
-<p>A Flexible Layout must have a parent element with the <em>display</em> property set to <em>flex</em>.</p>
-
-<p>Direct child elements(s) of the flexible container automatically becomes flexible items.</p>
-
+<span class="comments">
+    <h3>
+        COMMENTS MICROSERVICE GOES HERE!
+    </h3>
+</span>
 </body>
 </html>
  

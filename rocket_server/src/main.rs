@@ -85,6 +85,9 @@ fn parse_mouse_clicks(json_data: str) {
     let mut click_point;
 
     //TODO: Add loop to this.
+    for click_point in json_data.iter() {
+        //TODO: Add a body to this.
+    }
     click_point.x = 0;
     click_point.y = 0;
 
@@ -100,7 +103,8 @@ fn parse_mouse_clicks(json_data: str) {
  * Output: a visual of those coordinates.
  * Description: Makes a visual heatmap of the coodinates.
  */
-fn make_heatmap(click_points: Vec::<coordinate>) {
+//TODO: change return type to a file or something.
+fn make_heatmap(click_points: Vec::<coordinate>) ->u64 {
     //TODO: Find a crate for making visual data.
 
     let heatmap = 1;

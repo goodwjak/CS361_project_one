@@ -17,11 +17,10 @@
 //new way, use all the stuff from rocket crate.
 //Actually they explain why they used the other way on the page.
 //URL:  https://rocket.rs/v0.5-rc/guide/overview/
+extern crate serde_json;
+
 use rocket::*;
 use std::io;
-//use serde::{Serialize, Deserialize};
-//use serde::de::{self, Deserialize, Deserializer, Visitor, SeqAccess, MapAccess};
-//#[macro_use] extern crate serde;
 use serde_json::{Result, Value};
 use plotters::prelude::*;
 
@@ -34,8 +33,6 @@ struct Coordinate {
     x: u64,
     y: u64
 }
-
-
 
 //#######################################
 //Request Handlers
@@ -61,15 +58,13 @@ fn index() -> &'static str {    // <- request handler
  */
 #[post("/heatmap/<pagename>",format="application/json", data="<input>")]
 fn get_heatmap_data(pagename: &str, input: &str) -> &'static str {
-    //let xy_vals = parse_mouse_clicks(input);
-    let mut v: Vec::<Coordinate> = Vec::new();
-
-    let xy_parsed = parse_json_post(input, &v);
+    let xy_vals = parse_mouse_clicks(input);
+    //let xy_parsed = parse_json_post(input, &v);
     //let heatmap_visual = make_heatmap(xy_vals);
     format!("{}, heatmap is being generated...", pagename);
     println!("Heatmap input: {}", input);
-    println!("xy_parsed: {}", xy_parsed["x_vals"]);
-    "TEST"
+    //println!("xy_parsed: {}", xy_parsed["x_vals"]);
+    "IN TESTING"
 }
 
 
@@ -80,16 +75,17 @@ fn get_heatmap_data(pagename: &str, input: &str) -> &'static str {
 //#######################################
 
 
-fn parse_json_post(json_data: &str, v: &Vec::<Coordinate>) -> Result<()> {
-     //make sede from json string.
-    let val: Value = serde_json::from_str(json_data)?;
-    println!("val: {}", val);
+fn test_parsing()
+{
+let test_json = r#"
+{
+    "x_vals": [1, 2, 3, 4],
+    "y_vals": [1, 2, 3, 4]
+}
+"#;
 
-    println!("x0: {}", val[0]);
-
-
-
-    Ok(())
+    let test_vec = parse_mouse_clicks(test_json);
+    println!("TEST_VEC: {}", test_vec);
 }
 
 
@@ -99,12 +95,20 @@ fn parse_json_post(json_data: &str, v: &Vec::<Coordinate>) -> Result<()> {
  * Description: converts the post data into usable data structs.
  */
 fn parse_mouse_clicks(json_data: &str) -> Vec::<Coordinate> {
+    
+    //Try to parse the json.
+    let res = serde_json::from_str(json_data);
+
+    //check if it's good or not.
+    if res.is_ok() {
+        let data: serde_json::Value = res.unwrap();
+    }
+    else {
+        return "ERROR WHILE PARSING"
+    }
+
     //create vector of coordinates.
     let mut v: Vec::<Coordinate> = Vec::new();
-
-    //let example_json: &str = "[776,776,788,788,812,812,798,798],[236,236,267,267,267,267,235,235]";
-    
-    let data = parse_json_post(json_data, &v);
 
     //A struct we will reuse in a loop to "map" the data.
     let mut click_point = Coordinate {
@@ -112,14 +116,12 @@ fn parse_mouse_clicks(json_data: &str) -> Vec::<Coordinate> {
         y: 0,
     };
 
-    //
-
-    //set to zero.
-    click_point.x = 0;
-    click_point.y = 0;
-
-    v.push(click_point);
-
+    //TODO: for loop through the array.
+    for i in (0..=data["x_vals"].len()) {
+        click_point.x = data["x_vals"][i];
+        click_point.y = data["y_vals"][i];
+        v.push(click_point);
+    }
     //return the vector and give ownership to the calling scope.
     v
 }

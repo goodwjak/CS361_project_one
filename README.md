@@ -24,17 +24,8 @@ A: A rust based microservice that will take mouse events and give back a
 heatmap of usage.<br>
 
 
-<b>TODO:</b>
-
--Get the rust server to work, AKA a page to pop up. DONE!<br>
--Figure out format for x,y data for mouse events that I will accept.<br>
--Write code to accept that data into a local variable for processing<br>
--Write stuff to use the click events to draw up a page or image.<br>
--Have the server send that image or page back(Whatever takes less bandwidth)<br>
-
-
-
-
+<b>Test command:</b><br>
+curl -XPOST -H "Content-type: application/json" -d '{"x_vals": [0, 1, 2, 3],"y_vals": [2, 4, 9, 1]}' '127.0.0.1:8000/heatmap/test'
 
 
 

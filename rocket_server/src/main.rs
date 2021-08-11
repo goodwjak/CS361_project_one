@@ -22,7 +22,6 @@ extern crate serde_json;
 use rocket::*;
 use std::io;
 use serde_json::{Result, Value};
-use plotters::prelude::*;
 
 //#######################################
 //GLOBAL
@@ -63,8 +62,9 @@ fn get_heatmap_data(pagename: &str, input: &str) -> &'static str {
     //let heatmap_visual = make_heatmap(xy_vals);
     format!("{}, heatmap is being generated...", pagename);
     println!("Heatmap input: {}", input);
+    println!("xy_vals: {}", xy_vals.len());
     //println!("xy_parsed: {}", xy_parsed["x_vals"]);
-    "IN TESTING"
+    "TESTING"
 }
 
 
@@ -75,51 +75,31 @@ fn get_heatmap_data(pagename: &str, input: &str) -> &'static str {
 //#######################################
 
 
-fn test_parsing()
-{
-let test_json = r#"
-{
-    "x_vals": [1, 2, 3, 4],
-    "y_vals": [1, 2, 3, 4]
-}
-"#;
-
-    let test_vec = parse_mouse_clicks(test_json);
-    println!("TEST_VEC: {}", test_vec);
-}
-
-
 /*
  * Input: json of mouse xy values when clicked.
  * Output: those xy values in a array or list.
  * Description: converts the post data into usable data structs.
  */
 fn parse_mouse_clicks(json_data: &str) -> Vec::<Coordinate> {
-    
+   
+    println!("input: {}", json_data);
     //Try to parse the json.
     let res = serde_json::from_str(json_data);
+    
+    println!("ret: {:?}", res);
 
-    //check if it's good or not.
-    if res.is_ok() {
-        let data: serde_json::Value = res.unwrap();
-    }
-    else {
-        return "ERROR WHILE PARSING"
-    }
-
-    //create vector of coordinates.
     let mut v: Vec::<Coordinate> = Vec::new();
+    let p: Value = res.unwrap();
+    let x_vals = p["x_vals"].as_array().unwrap();
+    let y_vals = p["y_vals"].as_array().unwrap();
 
-    //A struct we will reuse in a loop to "map" the data.
-    let mut click_point = Coordinate {
-        x: 0,
-        y: 0,
-    };
+    let arr_len = x_vals.len(); 
 
-    //TODO: for loop through the array.
-    for i in (0..=data["x_vals"].len()) {
-        click_point.x = data["x_vals"][i];
-        click_point.y = data["y_vals"][i];
+    for i in 0..arr_len {
+        let mut click_point = Coordinate {
+        x: x_vals.get(i).unwrap().as_u64().unwrap(),
+        y: y_vals.get(i).unwrap().as_u64().unwrap(),
+        };
         v.push(click_point);
     }
     //return the vector and give ownership to the calling scope.

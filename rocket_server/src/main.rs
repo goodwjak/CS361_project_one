@@ -81,13 +81,8 @@ fn get_heatmap_data(pagename: &str, input: &str) -> &'static str {
  * Description: converts the post data into usable data structs.
  */
 fn parse_mouse_clicks(json_data: &str) -> Vec::<Coordinate> {
-   
-    println!("input: {}", json_data);
     //Try to parse the json.
     let res = serde_json::from_str(json_data);
-    
-    println!("ret: {:?}", res);
-
     let mut v: Vec::<Coordinate> = Vec::new();
     let p: Value = res.unwrap();
     let x_vals = p["x_vals"].as_array().unwrap();

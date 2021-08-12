@@ -15,17 +15,28 @@ html document you can use it to post the mouse event data to the heatmap
 microservice.<br>
 
 
-Going to add the code I made in my gitlab repo to this one.
-I kinda wish I would have remembered I had this one a gitlab I was supposed to
-use.
-
 Q:Anyway What is this?<br>
 A: A rust based microservice that will take mouse events and give back a 
 heatmap of usage.<br>
 
 
 <b>Test command:</b><br>
-curl -XPOST -H "Content-type: application/json" -d '{"x_vals": [0, 1, 2, 3],"y_vals": [2, 4, 9, 1]}' '127.0.0.1:8000/heatmap/test'
+curl -XPOST -H "Content-type: application/json" -d '{"x_vals": [0, 400, 700, 500],"y_vals": [0, 400, 700, 500], "x_res": 1920, "y_res": 1080}' '127.0.0.1:8000/heatmap/file/test'
+<br>
+<br>
+The command above will give you a heatmap SVG image when working locally<br>
+with a 1920x1080 resolusion.<br>
+<br>
+<b>What do I need to send?</b>
+
+<ul>
+    <li>"x_vals": [array elements here], "y_vals": [array elements here]</li>
+    <li>"x_res": screenx here, "y_res": screeny here </li>
+</ul>
+
+<br>
+That's pretty much it for using my microservice.
+
 
 
 

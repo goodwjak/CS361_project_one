@@ -16,14 +16,13 @@
 extern crate serde_json;
 
 use rocket::*;
-use std::io;
+//use std::io;
 use serde_json::{Result, Value};
 use svg::Document;
 use svg::node::element::Path as svg_path;
 use svg::node::element::path::Data;
-use std::path::{PathBuf, Path};
-use rocket::fs::{NamedFile, relative};
-
+//use std::path::{PathBuf, Path};
+use rocket::fs::{NamedFile,FileServer, relative};
 
 
 //#######################################
@@ -40,37 +39,14 @@ struct Coordinate {
 //Request Handlers
 //#######################################
 
-
-
 /*
- * Input: a get request handler
- * Ouput: a static string.
- * Description: Basic does nothing cool.
- */
-#[get("/")] // <- Route attribute
-fn index() -> &'static str {    // <- request handler
-    "Hello world"
-}
-
-
-/*
- * Input: a bunch of mouse data.
- * Output: a heatmap file.
- * Description: handles heatmap requests.
- *
-#[post("/heatmap/<pagename>",format="application/json", data="<input>")]
-fn get_heatmap_data(pagename: &str, input: &str) -> &'static str {
-    let xy_vals = parse_mouse_clicks(input);
-    let heatmap_doc = paint_heatmap(xy_vals);
-    format!("{}, heatmap is being generated...", pagename);
-    println!("Heatmap input: {}", input);
-    "FILE"
-}
+ *Input: json data.
+ *Output: svg file
+ *Description: makes a heatmap and returns it.
 */
-
-#[post("/heatmap/file/<pagename>",format="application/json", data="<input>")]
-pub async fn get_heatmap_data(pagename: &str, input: &str) -> Option<NamedFile> {
-    println!("input: {:?}", input);
+#[post("/heatmap",format="application/json", data="<input>")]
+async fn heatmap(input: &str) -> Option<NamedFile> {
+    println!("Input: {:?}", input);
     let xy_vals = parse_mouse_clicks(input);
     let screen_size = parse_screen_size(input);
     paint_heatmap(xy_vals, screen_size.x, screen_size.y);
@@ -157,7 +133,7 @@ fn parse_mouse_clicks(json_data: &str) -> Vec::<Coordinate> {
     let arr_len = x_vals.len(); 
 
     for i in 0..arr_len {
-        let mut click_point = Coordinate {
+        let click_point = Coordinate {
         x: x_vals.get(i).unwrap().as_u64().unwrap(),
         y: y_vals.get(i).unwrap().as_u64().unwrap(),
         };
@@ -192,8 +168,8 @@ fn parse_screen_size(json_data: &str) -> Coordinate {
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        //.mount("/", routes![index])
-        .mount("/", routes![get_heatmap_data])
+        .mount("/", routes![heatmap])
+        .mount("/", FileServer::from(relative!("../public_html")))
 }
 
 

@@ -36,8 +36,14 @@ with a 1920x1080 resolusion.<br>
 
 <br>
 That's pretty much it for using my microservice. You can edit the "Rocket.toml"
-<br>File in order to change the port and IP is responds to.
-
+<br>File in order to change the port and IP is responds to.<br>
+<br><br>
+<b>Running rust microservice:</b>
+<br>
+In the rocket_server folder in terminal enter "cargo run"
+<br>
+If you want a example of how to use the microservice look at <br>
+the files in the public_html folder.
 
 
 

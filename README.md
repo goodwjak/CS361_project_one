@@ -35,8 +35,8 @@ with a 1920x1080 resolusion.<br>
 </ul>
 
 <br>
-That's pretty much it for using my microservice.
-
+That's pretty much it for using my microservice. You can edit the "Rocket.toml"
+<br>File in order to change the port and IP is responds to.
 
 
 

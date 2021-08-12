@@ -7,8 +7,8 @@
     <!--This is for tracking mouse events on the page-->
 <script>
     //Make two global arrays to hold the mouse click vals.
-    let x_arr = new Array();
-    let y_arr = new Array();
+    let x_vals = new Array();
+    let y_vals = new Array();
 
      // coordinate function that calculate the X
      // coordinate and Y coordinates
@@ -19,21 +19,25 @@
         var y = event.clientY;
         document.getElementById("X").value = x;
         document.getElementById("Y").value = y;
-        x_arr.push(x);
-        y_arr.push(y);
+        x_vals.push(x);
+        y_vals.push(y);
     }
 
     function post_heatmap(event) {
-        console.log("NOTHING YET");
         //Convert the arr into json stuff.
-        const x_json = JSON.stringify(x_arr);
-        const y_json = JSON.stringify(y_arr);
-        const coordinates_json = x_json + ", " +  y_json;
-        console.log(coordinates_json);
+        const x_json = JSON.stringify(x_vals);
+        const y_json = JSON.stringify(y_vals);
+        const x_res = JSON.stringify(window.screen.availWidth);
+        const y_res = JSON.stringify(window.screen.availHeight);
+
+        json_data = '"x_vals":' + x_json + ', "y_vals": ' +  y_json;
+        json_data += ',"x_res": ' + x_res + ', "y_res": ' + y_res; 
+        console.log(json_data);
         
         //Create a xhr object.
         let xhr = new XMLHttpRequest();
-        let url = "127.0.0.1:8000/heatmap/goal_tracker";
+        let url = "127.0.0.1:8080/heatmap/image/goal_tracker";
+        //let url = "https://app-42a65938-0055-4349-b7d9-0d43ef7f0da6.cleverapps.io/heatmap/image/goal_tracker";
 
         //open a connection
         xhr.open("POST", url, true);
@@ -55,7 +59,7 @@
             //var data = JSON.stringify({ "name": name.value, "email": email.value });
   
             // Sending data with the request
-            xhr.send(coordinates_json);
+            xhr.send(json_data);
         
         
     }

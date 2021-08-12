@@ -70,6 +70,7 @@ fn get_heatmap_data(pagename: &str, input: &str) -> &'static str {
 
 #[post("/heatmap/file/<pagename>",format="application/json", data="<input>")]
 pub async fn get_heatmap_data(pagename: &str, input: &str) -> Option<NamedFile> {
+    println!("input: {:?}", input);
     let xy_vals = parse_mouse_clicks(input);
     let screen_size = parse_screen_size(input);
     paint_heatmap(xy_vals, screen_size.x, screen_size.y);

@@ -5,75 +5,7 @@
 
 <link rel="stylesheet" type="text/css" href="style.css">
     <!--This is for tracking mouse events on the page-->
-<script>
-    //Make two global arrays to hold the mouse click vals.
-    let x_vals = new Array();
-    let y_vals = new Array();
-
-     // coordinate function that calculate the X
-     // coordinate and Y coordinates
-     function coordinate(event) {
-        // clientX gives horizontal coordinate
-        var x = event.clientX;
-        // clientY gives vertical coordinates
-        var y = event.clientY;
-        document.getElementById("X").value = x;
-        document.getElementById("Y").value = y;
-        x_vals.push(x);
-        y_vals.push(y);
-    }
-
-    function post_heatmap(event) {
-        //Convert the arr into json stuff.
-        //const x_json = JSON.stringify(x_vals);
-        //const y_json = JSON.stringify(y_vals);
-        //const x_res = JSON.stringify(window.screen.availWidth);
-        //const y_res = JSON.stringify(window.screen.availHeight);
-        
-        //Format stuff.
-        var json_data = {
-            "x_vals": x_vals,
-            "y_vals": y_vals,
-            "x_res": window.screen.availWidth,
-            "y_res": window.screen.availHeight
-            };
-
-        json_data = JSON.stringify(json_data);
-
-        //json_data = '"x_vals":' + x_json + ', "y_vals": ' +  y_json;
-        //json_data += ',"x_res": ' + x_res + ', "y_res": ' + y_res; 
-        console.log(json_data);
-        
-        //Create a xhr object.
-        let xhr = new XMLHttpRequest();
-        let url = "/heatmap";
-
-        //open a connection
-        xhr.open("POST", url, true);
-
-        //set the request header
-            xhr.setRequestHeader("Content-Type", "application/json");
-  
-            // Create a state change callback
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-  
-                    // Print received data from server
-                    //body.innerHTML = this.responseText;
-                    document.getElementById("mainBody").innerHTML = this.responseText;
-  
-                }
-            };
-  
-            // Converting JSON data to string
-            //var data = JSON.stringify({ "name": name.value, "email": email.value });
-  
-            // Sending data with the request
-            xhr.send(json_data);
-        
-        
-    }
-</script>
+    <script type="text/javascript" src="script.js"></script>
 </head>
 
 <body id="mainBody" onclick="coordinate(event)">
@@ -92,7 +24,7 @@
 
    <!--Main Boxes-->
 <div class="flex-container">
-  <div>
+  <div id="goals">
       <span>
         <h3>
             Goal Data
@@ -100,14 +32,11 @@
       </span>
 
     <span>
-        <form action="/action_page.php">
         <label for="GoalSearch:<">GoalSearch:</label>
         <input type="text" id="goalSearch" name="GoalSearch:<" value="Empty"><br>
         <label for="description">Description</label>
-        <textarea type="text" id="description" name="description"></textarea><br>
-
-
-        </form>       
+        <textarea type="text" id="searchBox" name="description"></textarea><br>       
+        <p class="myButton" onclick="find_goal(event)" >SEARCH</p>
     </span>
 
       <br>
@@ -116,53 +45,34 @@
       </span>
   </div>
   
-  <div>
+  <div id="settings">
       <span>
           <h3>
       Settings
           </h3>
       </span>
-      
-    <span>
+    
+    
+    <span> 
     <!-- Rounded switch -->
     <label class="switch">
     <input type="checkbox">
-    <span class="slider round"></span>
-    </label>
-    Live Preview
-    </span>
-
-    <br>    
-
-    <span>
-    <!-- Rounded switch -->
-    <label class="switch">
-    <input type="checkbox">
-    <span class="slider round"></span>
+    <span class="slider round" onclick="dark_mode(event)"></span>
     </label>
     Dark Mode
     </span>
 
   </div>
   
-  <div>
+  <div id="add">
       <span><h3>Add a goal</h3></span>
 
     <span>
-        <form action="/action_page.php">
         <label for="goalName">GoalName:</label>
         <input type="text" id="goalName" name="goalName" value="Empty"><br>
         <label for="description">Description</label>
-        <textarea type="text" id="description" name="description"></textarea><br>
-        <input class="myButton" type="submit" value="Add Goal">
-        <input class="myButton" type="undo" value="UNDO">
-        </form> 
-    </span>
-
-    <span>
-        <h4>Status Log</h4>
-        <br>
-        <textarea class="statusLog"> </textarea>
+        <textarea type="text" id="goalDescription" name="description"></textarea><br>
+        <p class="myButton" onclick="add_goal(event)">Add Goal</p> 
     </span>
 
   </div>  
@@ -171,9 +81,10 @@
 
 <span class="comments">
     <h3>
-        COMMENTS MICROSERVICE GOES HERE!
+        COMMENTS MICROSERVICE
     </h3>
-    <textarea class="chatBox" rows=10 cols=80></textarea>
+    <textarea id="chatBoxOutput" rows=10 cols=80></textarea>
+    <input type="text" id="chatBoxInput" name="chatInput" onkeypress="test_comment(event)">
 </span>
 
 </body>

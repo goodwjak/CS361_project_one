@@ -17,7 +17,8 @@ extern crate serde_json;
 
 use rocket::*;
 //use std::io;
-use serde_json::{Result, Value};
+//use serde_json::{Result, Value};
+use serde_json::Value;
 use svg::Document;
 use svg::node::element::Path as svg_path;
 use svg::node::element::path::Data;

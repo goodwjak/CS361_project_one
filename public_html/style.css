@@ -2,22 +2,33 @@ body {
     background-image: url("images/grid.jpg");
     max-width: 100%;
     max-height: 100%;
+    background-color: white;
+}
 
+.dark-mode { 
+    background-color: black; 
+    color: white; 
+} 
+.light-mode { 
+    background-color: white; 
+    color: black; 
 }
 
 .flex-container {
-  display: flex;
-  background-color: DodgerBlue;
+    background-color: gray;
+    display: flex;
 }
 
 .flex-container > div {
+    border: 10px solid black;
     flex-grow: 1;
-  background-color: #f1f1f1;
-  margin: 10px;
-  padding: 20px;
-  text-align: center;
-  font-size: 30px;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    font-size: 30px;
 }
+
+
 
 .myButton {
 	box-shadow: 4px 4px 12px 1px #fff6af;
@@ -125,4 +136,19 @@ input:checked + .slider:before {
 
 .chatBox{
     margin-left: 35vw;
+}
+
+#chatBoxOutput{
+    width: 30vw;
+    margin-left: 35vw;
+    color: orange;
+    background-color: DimGray;
+}
+
+#chatBoxInput{
+    font-size: 18px;
+    width: 30vw;
+    margin-left: 35vw;
+    color: orange;
+    background-color: DimGray;
 }
